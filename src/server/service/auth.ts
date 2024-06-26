@@ -42,7 +42,7 @@ const ServiceAuth = new Elysia({ name: "auth" })
     }
 
     // clear cookie on bad session
-    if (!session) {
+    else if (!session) {
       const { name, value, attributes } = lucia.createBlankSessionCookie()
       ctx.cookie[name].set({ value, ...attributes })
     }
