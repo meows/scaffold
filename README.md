@@ -14,16 +14,19 @@ An integration of Elysia, Lucia, TanStack Query.
 bun i
 ```
 
+Set the schema of the database.
 ```bash
 bun push
 ```
 
 ## Development
 
+Launch the dev server.
 ```bash
 bun dev
 ```
 
+Launch the DB viewer (optional).
 ```bash
 bun studio
 ```
