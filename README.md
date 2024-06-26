@@ -10,6 +10,7 @@ An integration of Elysia, Lucia, TanStack Query.
 
 ## Installation
 
+Install JS dependencies.
 ```bash
 bun i
 ```
