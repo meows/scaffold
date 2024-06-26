@@ -11,7 +11,7 @@ bun i
 ```
 
 ```bash
-bun db:push
+bun push
 ```
 
 ## Development
@@ -21,5 +21,5 @@ bun dev
 ```
 
 ```bash
-bun db:studio
+bun studio
 ```
