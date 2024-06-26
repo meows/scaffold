@@ -7,7 +7,7 @@ import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core"
 const time = (name:string) => integer(name, {mode:"timestamp"}).default(sql`CURRENT_TIMESTAMP`)
 
 // —————————————————————————————————————————————————————————————————————————————
-// Table
+// Account
 
 export const User = sqliteTable("user", {
   id:    text("id").primaryKey(),
@@ -20,5 +20,14 @@ export const Session = sqliteTable("session", {
   userId:    text("user_id").notNull().references(() => User.id, { onDelete: "cascade" }),
   expiresAt: integer("expires_at").notNull(),
 })
+
+// —————————————————————————————————————————————————————————————————————————————
+// Chat
+
+export const Room = sqliteTable("room", {
+  id:   text("id").primaryKey(),
+  name: text("name").notNull(),
+})
+
 
 // https://lucia-auth.com/database/drizzle
