@@ -29,6 +29,10 @@ const root = new Elysia<"/api">({ prefix: "/api" })
   .use(hello)
   .use(user)
 
+if (root.server) console.log(
+  `\x1b[32m✓\x1b[0m Server running on ${root.server.hostname}:${root.server.port}.`
+)
+
 // -----------------------------------------------------------------------------
 // Export
 
