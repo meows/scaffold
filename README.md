@@ -4,22 +4,32 @@ An integration of Elysia, Lucia, TanStack Query.
 
 - https://elysiajs.com/life-cycle/overview.html
 
+## Dependencies
+
+- [Bun]
+
 ## Installation
 
+Install JS dependencies.
 ```bash
 bun i
 ```
 
+Set the schema of the database.
 ```bash
-bun db:push
+bun push
 ```
 
 ## Development
 
+Launch the dev server.
 ```bash
 bun dev
 ```
 
+Launch the DB viewer (optional).
 ```bash
-bun db:studio
+bun studio
 ```
+
+[Bun]: https://bun.sh
