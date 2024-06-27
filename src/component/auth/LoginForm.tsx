@@ -27,10 +27,11 @@ import { Label } from "#/ui/label"
 const defaultValues = { email: "", password: "" }
 
 function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
+  const { touchedErrors, isValidating } = field.state.meta
   return (
     <div>
-      {field.state.meta.touchedErrors && <span className="text-red-500 text-sm">{field.state.meta.touchedErrors}</span>}
-      {field.state.meta.isValidating && <span className="text-secondary-foreground/80 text-sm">Validating...</span>}
+      {touchedErrors && <span className="text-red-500 text-sm">{touchedErrors}</span>}
+      {isValidating && <span className="text-secondary-foreground/80 text-sm">Validating...</span>}
     </div>
   )
 }
