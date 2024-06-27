@@ -5,6 +5,7 @@ import { serverTiming } from "@elysiajs/server-timing"
 
 import user  from "~/server/route/user"
 import hello from "~/server/route/hello"
+import Color from "~/lib/console"
 
 // —————————————————————————————————————————————————————————————————————————————
 // OpenAPI
@@ -30,7 +31,7 @@ const root = new Elysia<"/api">({ prefix: "/api" })
   .use(user)
 
 if (root.server) console.log(
-  `\x1b[32m✓\x1b[0m Server running on ${root.server.hostname}:${root.server.port}.`
+  `${Color.green("✓")} Server running on ${root.server.hostname}:${root.server.port}.`
 )
 
 // -----------------------------------------------------------------------------
