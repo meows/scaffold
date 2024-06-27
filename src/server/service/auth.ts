@@ -11,7 +11,8 @@ import lucia from "~/auth/lucia"
 
 const session_null = { user: null, session: null }
 
-type LuciaContext = Promise<{
+/** Addendum to Elysia context from `ServiceAuth`. */
+export type LuciaContext = Promise<{
   user: User | null
   session: Session | null
 }>
@@ -19,6 +20,16 @@ type LuciaContext = Promise<{
 // —————————————————————————————————————————————————————————————————————————————
 // Service :: Authentication
 
+/** Augment Elysia context with `user` and `session` extracted from cookie. 
+ * - If you want to automatically protect the route then use `.guard()` in 
+ *   addition to this service.
+ * - Also adds a convenience method `isGoodSession`.
+ * @example
+ * const root = new Elysia<"/api">({ prefix: "/api" })
+ *   .use(ServiceAuth)
+ *   .guard(...) // optional if you want to automatically protect the route
+ * @see https://elysiajs.com/essential/scope.html#guard
+ */
 const ServiceAuth = new Elysia({ name: "auth" })
   .derive({ as: "scoped" }, async (ctx): LuciaContext => {
     // CRSF security check
