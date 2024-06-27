@@ -57,7 +57,7 @@ export function RegisterForm() {
     },
   })
 
-  const onRegister = (e: React.FormEvent<HTMLFormElement>) => {
+  function onRegister(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     e.stopPropagation()
     handleSubmit()
