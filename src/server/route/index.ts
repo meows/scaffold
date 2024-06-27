@@ -1,11 +1,13 @@
 import swagger from "@elysiajs/swagger"
 import { Elysia } from "elysia"
-
 import { serverTiming } from "@elysiajs/server-timing"
 
+// -----------------------------------------------------------------------------
+// Internal
+
+import { green } from "~/lib/console"
 import user  from "~/server/route/user"
 import hello from "~/server/route/hello"
-import Color from "~/lib/console"
 
 // —————————————————————————————————————————————————————————————————————————————
 // OpenAPI
@@ -31,7 +33,7 @@ const root = new Elysia<"/api">({ prefix: "/api" })
   .use(user)
 
 if (root.server) console.log(
-  `${Color.green("✓")} Server running on ${root.server.hostname}:${root.server.port}.`
+  `${green("✓")} Server running on ${root.server.hostname}:${root.server.port}.`
 )
 
 // -----------------------------------------------------------------------------
