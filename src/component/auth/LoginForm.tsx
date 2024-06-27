@@ -41,7 +41,7 @@ export function LoginForm() {
     },
   })
 
-  function Δsubmit(e: React.FormEvent<HTMLFormElement>) {
+  function onLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     e.stopPropagation()
     handleSubmit()
@@ -54,7 +54,7 @@ export function LoginForm() {
         <CardDescription>Enter your email below to login to your account.</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <form className="grid gap-4" onSubmit={Δsubmit}>
+        <form className="grid gap-4" onSubmit={onLogin}>
           <section className="grid gap-2">
             <Field
               name="email"

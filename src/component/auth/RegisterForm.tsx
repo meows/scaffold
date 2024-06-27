@@ -57,6 +57,12 @@ export function RegisterForm() {
     },
   })
 
+  const onRegister = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    handleSubmit()
+  }
+
   return (
     <Card className="mx-auto min-w-[24rem] max-w-lg">
       <CardHeader>
@@ -64,11 +70,7 @@ export function RegisterForm() {
         <CardDescription>Enter your information to create an account</CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="grid gap-4" onSubmit={e => {
-          e.preventDefault()
-          e.stopPropagation()
-          handleSubmit()
-        }}>
+        <form onSubmit={onRegister} className="grid gap-4">
           <div className="grid gap-2">
             <Field
               name="email"
