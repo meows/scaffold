@@ -61,6 +61,9 @@ const ServiceAuth = new Elysia({ name: "auth" })
     return { user, session }
   })
   .macro(({ onBeforeHandle }) => ({
+    /** Opt into automatically checking authorization. 
+     * Returns `401` if session is not fresh.
+     */
     isAuthorized(bit: boolean) {
       onBeforeHandle(({ session, error }) => {
         if (!session?.fresh && bit) return error(401)
