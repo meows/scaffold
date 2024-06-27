@@ -1,7 +1,5 @@
 "use client"
 
-import type { FieldApi } from "@tanstack/react-form"
-
 // -----------------------------------------------------------------------------
 // Library & Constant
 
@@ -20,21 +18,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "#/ui/button"
 import { Input } from "#/ui/input"
 import { Label } from "#/ui/label"
+import FieldInfo from "#/form/FieldInfo"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Environment
 
 const defaultValues = { email: "", password: "" }
-
-function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
-  const { touchedErrors, isValidating } = field.state.meta
-  return (
-    <div>
-      {touchedErrors && <span className="text-red-500 text-sm">{touchedErrors}</span>}
-      {isValidating && <span className="text-secondary-foreground/80 text-sm">Validating...</span>}
-    </div>
-  )
-}
 
 // —————————————————————————————————————————————————————————————————————————————
 // Component
