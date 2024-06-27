@@ -39,7 +39,7 @@ function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
 // Component
 
 export function LoginForm() {
-  const form = useForm({
+  const { Field, Subscribe, handleSubmit } = useForm({
     defaultValues,
     validatorAdapter: valibotValidator(),
     onSubmit: async ({ value: { email, password } }) => {
@@ -51,12 +51,10 @@ export function LoginForm() {
     },
   })
 
-  const Field = form.Field
-
   function Δsubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     e.stopPropagation()
-    form.handleSubmit()
+    handleSubmit()
   }
 
   return (
@@ -110,8 +108,8 @@ export function LoginForm() {
               </>}
             />
           </section>
-          <form.Subscribe
-            selector={(state) => [state.canSubmit, state.isSubmitting]}
+          <Subscribe
+            selector={state => [state.canSubmit, state.isSubmitting]}
             children={([canSubmit, isSubmitting]) => <>
               <Button type="submit" className="w-full" disabled={!canSubmit || isSubmitting}>
                 {isSubmitting ? "Logging in..." : "Login"}
