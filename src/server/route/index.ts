@@ -6,7 +6,7 @@ import { serverTiming } from "@elysiajs/server-timing"
 // Internal
 
 import { green } from "~/lib/console"
-import user  from "~/server/route/user"
+import user from "~/server/route/user"
 import hello from "~/server/route/hello"
 
 // —————————————————————————————————————————————————————————————————————————————
