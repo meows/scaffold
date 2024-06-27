@@ -23,11 +23,11 @@ export type LuciaContext = Promise<{
 /** Augment Elysia context with `user` and `session` extracted from cookie. 
  * - If you want to automatically protect the route then use `.guard()` in 
  *   addition to this service.
- * - Also adds a convenience method `isGoodSession`.
+ * - Also adds a convenience method `isAuthorized`.
  * @example
  * const root = new Elysia<"/api">({ prefix: "/api" })
  *   .use(ServiceAuth)
- *   .guard(...) // optional if you want to automatically protect the route
+ *   .guard({ isAuthorized: true })) // optional
  * @see https://elysiajs.com/essential/scope.html#guard
  */
 const ServiceAuth = new Elysia({ name: "auth" })
@@ -61,7 +61,7 @@ const ServiceAuth = new Elysia({ name: "auth" })
     return { user, session }
   })
   .macro(({ onBeforeHandle }) => ({
-    isGoodSession(bit: boolean) {
+    isAuthorized(bit: boolean) {
       onBeforeHandle(({ session, error }) => {
         if (!session?.fresh && bit) return error(401)
       })
