@@ -21,9 +21,9 @@ export type LuciaContext = Promise<{
 // Service :: Authentication
 
 /** Augment Elysia context with `user` and `session` extracted from cookie.
+ * - Scoped to the route.
  * - If you want to automatically protect the route then use `guard` in
  *   addition to this service.
- * - Also adds a convenience method `isAuthorized`.
  * @example
  * const root = new Elysia<"/api">({ prefix: "/api" })
  *   .use(ServiceAuth)
