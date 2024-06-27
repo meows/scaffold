@@ -101,7 +101,7 @@ export function LoginForm() {
           <Subscribe
             selector={state => [state.canSubmit, state.isSubmitting]}
             children={([canSubmit, isSubmitting]) => <>
-              <Button type="submit" className="w-full" disabled={!canSubmit || isSubmitting}>
+              <Button type="submit" disabled={!canSubmit || isSubmitting} className="w-full">
                 {isSubmitting ? "Logging in..." : "Login"}
               </Button>
               <Button variant="outline" className="w-full">
