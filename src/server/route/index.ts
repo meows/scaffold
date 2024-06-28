@@ -1,9 +1,12 @@
 import swagger from "@elysiajs/swagger"
 import { Elysia } from "elysia"
-
 import { serverTiming } from "@elysiajs/server-timing"
 
-import user  from "~/server/route/user"
+// -----------------------------------------------------------------------------
+// Internal
+
+import { green } from "~/lib/console"
+import user from "~/server/route/user"
 import hello from "~/server/route/hello"
 
 // —————————————————————————————————————————————————————————————————————————————
@@ -30,7 +33,7 @@ const root = new Elysia<"/api">({ prefix: "/api" })
   .use(user)
 
 if (root.server) console.log(
-  `\x1b[32m✓\x1b[0m Server running on ${root.server.hostname}:${root.server.port}.`
+  `${green("✓")} Server running on ${root.server.hostname}:${root.server.port}.`
 )
 
 // -----------------------------------------------------------------------------

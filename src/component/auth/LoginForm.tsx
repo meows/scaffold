@@ -1,7 +1,5 @@
 "use client"
 
-import type { FieldApi } from "@tanstack/react-form"
-
 // -----------------------------------------------------------------------------
 // Library & Constant
 
@@ -20,26 +18,18 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "#/ui/button"
 import { Input } from "#/ui/input"
 import { Label } from "#/ui/label"
+import FieldInfo from "#/form/FieldInfo"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Environment
 
 const defaultValues = { email: "", password: "" }
 
-function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
-  return (
-    <div>
-      {field.state.meta.touchedErrors && <span className="text-red-500 text-sm">{field.state.meta.touchedErrors}</span>}
-      {field.state.meta.isValidating && <span className="text-secondary-foreground/80 text-sm">Validating...</span>}
-    </div>
-  )
-}
-
 // —————————————————————————————————————————————————————————————————————————————
 // Component
 
 export function LoginForm() {
-  const form = useForm({
+  const { Field, Subscribe, handleSubmit } = useForm({
     defaultValues,
     validatorAdapter: valibotValidator(),
     onSubmit: async ({ value: { email, password } }) => {
@@ -51,12 +41,10 @@ export function LoginForm() {
     },
   })
 
-  const Field = form.Field
-
-  function Δsubmit(e: React.FormEvent<HTMLFormElement>) {
+  function onLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     e.stopPropagation()
-    form.handleSubmit()
+    handleSubmit()
   }
 
   return (
@@ -66,7 +54,7 @@ export function LoginForm() {
         <CardDescription>Enter your email below to login to your account.</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <form className="grid gap-4" onSubmit={Δsubmit}>
+        <form className="grid gap-4" onSubmit={onLogin}>
           <section className="grid gap-2">
             <Field
               name="email"
@@ -110,10 +98,10 @@ export function LoginForm() {
               </>}
             />
           </section>
-          <form.Subscribe
-            selector={(state) => [state.canSubmit, state.isSubmitting]}
+          <Subscribe
+            selector={state => [state.canSubmit, state.isSubmitting]}
             children={([canSubmit, isSubmitting]) => <>
-              <Button type="submit" className="w-full" disabled={!canSubmit || isSubmitting}>
+              <Button type="submit" disabled={!canSubmit || isSubmitting} className="w-full">
                 {isSubmitting ? "Logging in..." : "Login"}
               </Button>
               <Button variant="outline" className="w-full">

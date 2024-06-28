@@ -1,7 +1,5 @@
 "use client"
 
-import type { FieldApi } from "@tanstack/react-form"
-
 // -----------------------------------------------------------------------------
 // Library & Constant
 
@@ -20,6 +18,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "#/ui/
 import { Button } from "#/ui/button"
 import { Input } from "#/ui/input"
 import { Label } from "#/ui/label"
+import FieldInfo from "#/form/FieldInfo"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Environment
@@ -42,20 +41,11 @@ const retry = (failed: number, { cause }: Error) => failed < 2
 
 const defaultValues = { email: "", password: "" }
 
-function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
-  return (
-    <div>
-      {field.state.meta.touchedErrors && <span className="text-red-500 text-sm">{field.state.meta.touchedErrors}</span>}
-      {field.state.meta.isValidating && <span className="text-secondary-foreground/80 text-sm">Validating...</span>}
-    </div>
-  )
-}
-
 // —————————————————————————————————————————————————————————————————————————————
 // Component
 
 export function RegisterForm() {
-  const form = useForm({
+  const { Field, Subscribe, handleSubmit } = useForm({
     defaultValues,
     validatorAdapter: valibotValidator(),
     onSubmit: async ({ value: { email, password } }) => {
@@ -67,6 +57,12 @@ export function RegisterForm() {
     },
   })
 
+  function onRegister(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    e.stopPropagation()
+    handleSubmit()
+  }
+
   return (
     <Card className="mx-auto min-w-[24rem] max-w-lg">
       <CardHeader>
@@ -74,13 +70,9 @@ export function RegisterForm() {
         <CardDescription>Enter your information to create an account</CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="grid gap-4" onSubmit={e => {
-          e.preventDefault()
-          e.stopPropagation()
-          form.handleSubmit()
-        }}>
+        <form onSubmit={onRegister} className="grid gap-4">
           <div className="grid gap-2">
-            <form.Field
+            <Field
               name="email"
               validators={{ onSubmit: schema_email }}
               children={(field) => <>
@@ -98,7 +90,7 @@ export function RegisterForm() {
                 <FieldInfo field={field} />
               </>}
             />
-            <form.Field
+            <Field
               name="password"
               validators={{ onBlur: schema_password }}
               children={(field) => <>
@@ -117,7 +109,7 @@ export function RegisterForm() {
               </>}
             />
           </div>
-          <form.Subscribe
+          <Subscribe
             selector={(state) => [state.canSubmit, state.isSubmitting]}
             children={([canSubmit, isSubmitting]) => <>
               <Button type="submit" className="w-full" disabled={!canSubmit || isSubmitting}>
