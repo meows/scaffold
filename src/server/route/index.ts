@@ -31,6 +31,11 @@ const root = new Elysia<"/api">({ prefix: "/api" })
   .use(docs)
   .use(hello)
   .use(user)
+  .ws("/ws", {
+    message(ws, message) {
+      ws.send(message)
+    },
+  })
 
 if (root.server) console.log(
   `${green("✓")} Server running on ${root.server.hostname}:${root.server.port}.`
