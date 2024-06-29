@@ -3,7 +3,7 @@ import type { Session, User } from "lucia"
 import { Elysia } from "elysia"
 import { verifyRequestOrigin } from "lucia"
 
-import { Cookie, GET, Host, Origin } from "~/constant/http"
+import { GET, Cookie, Host, Origin } from "~/constant/http"
 import lucia from "~/auth/lucia"
 
 // —————————————————————————————————————————————————————————————————————————————

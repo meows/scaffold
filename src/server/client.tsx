@@ -1,4 +1,4 @@
-import type { App } from "~/server/route"
+import type { App } from "~/server"
 
 import { treaty } from "@elysiajs/eden"
 import { API_URL } from "~/constant/config"

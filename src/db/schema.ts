@@ -24,10 +24,11 @@ export const Session = sqliteTable("session", {
 // —————————————————————————————————————————————————————————————————————————————
 // Chat
 
-export const Room = sqliteTable("room", {
-  id:   text("id").primaryKey(),
-  name: text("name").notNull(),
+export const Chat = sqliteTable("room", {
+  id: integer("id").primaryKey(),
+  author: text("author").notNull().references(() => User.id),
+  message: text("message").notNull(),
+  posted: time("posted").notNull(),
 })
-
 
 // https://lucia-auth.com/database/drizzle

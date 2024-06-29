@@ -123,7 +123,7 @@ export function RegisterForm() {
         </form>
         <footer className="mt-4 text-center text-sm">
           Already have an account?&nbsp;
-          <Link href="./login" className="underline dark:hover:text-blue-400 hover:text-blue-500">
+          <Link href="./login" className="underline hover:text-blue-500 dark:hover:text-blue-400">
             Log in
           </Link>
         </footer>
