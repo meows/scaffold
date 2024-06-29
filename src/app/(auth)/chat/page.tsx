@@ -29,6 +29,7 @@ export default function ChatPage() {
   const [input, setInput] = useState("")
   const $input = useRef<HTMLInputElement>(null)
 
+  // ---- Handler ---- //
   const chat = useMemo(() => client.api.ws.subscribe(), [])
   const onSend = (e:React.FormEvent) => {
     if (input.length === 0) return
@@ -38,7 +39,6 @@ export default function ChatPage() {
     setInput("")
   }
   const onInput = (e:React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)
-
   const onKeyDown = useCallback((e:KeyboardEvent) => {
     switch (e.key) {
       case "/":
@@ -54,6 +54,7 @@ export default function ChatPage() {
     }
   }, [])
 
+  // ---- Effects ---- //
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown)
     return () => window.removeEventListener("keydown", onKeyDown)
