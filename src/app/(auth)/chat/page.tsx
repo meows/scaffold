@@ -1,11 +1,10 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { Button } from "~/component/ui/button"
-import { Card, CardContent, CardHeader } from "~/component/ui/card"
-import { Input } from "~/component/ui/input"
+import { Card, CardContent, CardHeader } from "#/ui/card"
+import { Button } from "#/ui/button"
+import { Input } from "#/ui/input"
 
-import { API_WEBSOCKET } from "~/constant/config"
 import client from "~/server/client"
 
 // —————————————————————————————————————————————————————————————————————————————
