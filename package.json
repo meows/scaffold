@@ -10,7 +10,7 @@
     "lint": "next lint",
     "push": "bunx drizzle-kit push",
     "studio": "bunx drizzle-kit studio",
-    "server": "bun run --hot ./src/server/route/index.ts"
+    "server": "bun run --hot ./src/server/index.ts"
   },
   "dependencies": {
     "@elysiajs/bearer": "^1.0.2",
