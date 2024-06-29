@@ -34,8 +34,8 @@ const raw_messages = [
   "Good night!",
 ]
 
-const messages = raw_messages.map((message, i) => ({
-  id: i,
+const messages = raw_messages.map((message, id) => ({
+  id,
   author: users[randomNat(users.length)].id,
   message,
   posted: new Date(),
