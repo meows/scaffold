@@ -28,9 +28,9 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<string[]>(mock_messages)
   const [input, setInput] = useState("")
   const $input = useRef<HTMLInputElement>(null)
+  const chat = useMemo(() => client.api.ws.subscribe(), [])
 
   // ---- Handler ---- //
-  const chat = useMemo(() => client.api.ws.subscribe(), [])
   const onSend = (e:React.FormEvent) => {
     if (input.length === 0) return
     e.preventDefault()
