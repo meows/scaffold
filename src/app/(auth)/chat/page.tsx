@@ -30,6 +30,7 @@ export default function ChatPage() {
 
   const chat = useMemo(() => client.api.ws.subscribe(), [])
   const onSend = (e:React.FormEvent) => {
+    if (input.length === 0) return
     e.preventDefault()
     e.stopPropagation()
     chat.send(input)
