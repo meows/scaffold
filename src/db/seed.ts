@@ -1,6 +1,7 @@
 import { generateId } from "lucia"
 import { hash as argon2 } from "@node-rs/argon2"
 
+import { throwError } from "~/lib/lambda"
 import { randomNat } from "~/lib/random"
 import { green } from "~/lib/console"
 import { db } from "~/db/client"
@@ -47,12 +48,12 @@ const messages = raw_messages.map((message, id) => ({
 await db.insert(User)
   .values(users)
   .execute()
-  .catch(console.error)
+  .catch(throwError)
 
 await db.insert(Chat)
   .values(messages)
   .execute()
-  .catch(console.error)
+  .catch(throwError)
 
 console.log(`${green("✓")} Inserted ${users.length} users.`)
 console.log(`${green("✓")} Inserted ${messages.length} messages.`)
