@@ -66,9 +66,9 @@ export default function ChatPage() {
         <CardHeader className="font-bold text-2xl">Chat</CardHeader>
         <CardContent>
           <main className="grid gap-4">
-            <article>
-              {messages.map((message, i) => <div key={i}>{message}</div>)}
-            </article>
+            <ul>
+              {messages.map((message, i) => <li key={i}>{message}</li>)}
+            </ul>
             <form>
               <fieldset className="flex gap-2">
                 <Input value={input} onChange={onInput} ref={$input} />
