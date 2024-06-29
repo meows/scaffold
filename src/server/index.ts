@@ -1,15 +1,15 @@
-import swagger from "@elysiajs/swagger"
 import { Elysia } from "elysia"
-import { serverTiming } from "@elysiajs/server-timing"
 import { cors } from "@elysiajs/cors"
+import { swagger } from "@elysiajs/swagger"
+import { serverTiming } from "@elysiajs/server-timing"
 
 // -----------------------------------------------------------------------------
 // Internal
 
 import { green } from "~/lib/console"
+import { API_PORT } from "~/constant/config"
 import user from "~/server/route/user"
 import hello from "~/server/route/hello"
-import { API_PORT } from "~/constant/config"
 
 // —————————————————————————————————————————————————————————————————————————————
 // OpenAPI
