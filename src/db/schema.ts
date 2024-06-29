@@ -25,10 +25,10 @@ export const Session = sqliteTable("session", {
 // Chat
 
 export const Chat = sqliteTable("room", {
-  id: integer("id").primaryKey(),
-  author: text("author").notNull().references(() => User.id),
+  id:      integer("id").primaryKey(),
+  author:  text("author").notNull().references(() => User.id),
   message: text("message").notNull(),
-  posted: time("posted").notNull(),
+  posted:  time("posted").notNull(),
 })
 
 // https://lucia-auth.com/database/drizzle

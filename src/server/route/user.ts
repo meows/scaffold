@@ -37,6 +37,7 @@ const schema_email = {
 // —————————————————————————————————————————————————————————————————————————————
 // Route :: User
 
+/** Public routes for user authentication. */
 const user = new Elysia<"/user">({ prefix: "/user" })
   .use(ServiceAuth)
   .get("/check/:email", async (req) => {
