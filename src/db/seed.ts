@@ -4,7 +4,7 @@ import { hash as argon2 } from "@node-rs/argon2"
 import { db } from "~/db/client"
 import { User } from "~/db/schema"
 import { green } from "~/lib/console"
-import randomChoice from "~/lib/random"
+import { randomNat } from "~/lib/random"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Mock Data
@@ -27,11 +27,19 @@ const users = await Promise.all(raw_users.map(async ({ email, password }) => ({
 })))
 
 const raw_messages = [
-  {
-    author: randomChoice(users).id,
-    message: "Hello, World!",
-  },
+  "Hello, world!",
+  "How are you?",
+  "What's up?",
+  "Good morning!",
+  "Good night!",
 ]
+
+const messages = raw_messages.map((message, i) => ({
+  id: i,
+  author: users[randomNat(users.length)].id,
+  message,
+  posted: new Date(),
+}))
 
 // —————————————————————————————————————————————————————————————————————————————
 // Insert Data
