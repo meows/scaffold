@@ -11,14 +11,8 @@ import { Chat, User } from "~/db/schema"
 // Mock Data
 
 const raw_users = [
-  {
-    email: "joe@gmail.com",
-    password: "secret password",
-  },
-  {
-    email: "bob@gmail.com",
-    password: "secret password",
-  },
+  { email: "joe@gmail.com", password: "secret password" },
+  { email: "bob@gmail.com", password: "secret password" },
 ]
 
 const users = await Promise.all(raw_users.map(async ({ email, password }) => ({
