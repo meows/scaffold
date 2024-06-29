@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { Button } from "~/component/ui/button"
 import { Card, CardContent, CardHeader } from "~/component/ui/card"
 import { Input } from "~/component/ui/input"
@@ -27,6 +27,7 @@ export default function ChatPage() {
   const [ws, setWs] = useState<WebSocket | null>(null)
   const [messages, setMessages] = useState<string[]>(mock_messages)
   const [input, setInput] = useState("")
+  const $input = useRef<HTMLInputElement>(null)
 
   const chat = useMemo(() => client.api.ws.subscribe(), [])
   const onSend = (e:React.FormEvent) => {
@@ -38,9 +39,29 @@ export default function ChatPage() {
   }
   const onInput = (e:React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)
 
+  const onKeyDown = useCallback((e:KeyboardEvent) => {
+    switch (e.key) {
+      case "/":
+        e.preventDefault()
+        e.stopPropagation()
+        $input.current?.focus()
+        break
+      case "Escape":
+        e.preventDefault()
+        e.stopPropagation()
+        $input.current?.blur()
+        break
+    }
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
+  }, [chat])
+
   return (
-    <div>
-      <Card>
+    <div className="p-4">
+      <Card className="mt-16">
         <CardHeader className="font-bold text-2xl">Chat</CardHeader>
         <CardContent>
           <main className="grid gap-4">
@@ -49,7 +70,7 @@ export default function ChatPage() {
             </article>
             <form>
               <fieldset className="flex gap-2">
-                <Input value={input} onChange={onInput} />
+                <Input value={input} onChange={onInput} ref={$input} />
                 <Button onClick={onSend}>Send</Button>
               </fieldset>
             </form>
