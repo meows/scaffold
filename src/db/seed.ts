@@ -10,18 +10,12 @@ import { Chat, User } from "~/db/schema"
 // —————————————————————————————————————————————————————————————————————————————
 // Mock Data
 
-const raw_users = [
+const usersᐟ = [
   { email: "joe@gmail.com", password: "secret password" },
   { email: "bob@gmail.com", password: "secret password" },
 ]
 
-const users = await Promise.all(raw_users.map(async ({ email, password }) => ({
-  email,
-  hash: await argon2(password),
-  id: generateId(15),
-})))
-
-const raw_messages = [
+const messagesᐟ = [
   "Hello, world!",
   "How are you?",
   "What's up?",
@@ -29,7 +23,13 @@ const raw_messages = [
   "Good night!",
 ]
 
-const messages = raw_messages.map((message, id) => ({
+const users = await Promise.all(usersᐟ.map(async ({ email, password }) => ({
+  email,
+  hash: await argon2(password),
+  id: generateId(15),
+})))
+
+const messages = messagesᐟ.map((message, id) => ({
   id,
   author: users[randomNat(users.length)].id,
   message,
@@ -41,11 +41,13 @@ const messages = raw_messages.map((message, id) => ({
 
 await db.insert(User)
   .values(users)
+  .onConflictDoNothing()
   .execute()
   .catch(throwError)
 
 await db.insert(Chat)
   .values(messages)
+  .onConflictDoNothing()
   .execute()
   .catch(throwError)
 
