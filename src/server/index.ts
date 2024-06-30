@@ -8,9 +8,9 @@ import { serverTiming } from "@elysiajs/server-timing"
 
 import { green } from "~/lib/console"
 import { API_PORT } from "~/constant/config"
-import user from "~/server/route/user"
 import hello from "~/server/route/hello"
-import { websocket } from "./route/ws"
+import user from "~/server/route/user"
+import websocket from "~/server/route/websocket"
 
 // —————————————————————————————————————————————————————————————————————————————
 // OpenAPI
