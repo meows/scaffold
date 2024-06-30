@@ -59,6 +59,14 @@ export default function ChatPage() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [chat])
 
+  useEffect(() => {
+    chat.on("message", (message) => {
+      if (typeof message !== "string") return
+      setMessages(state => state.concat(message))
+    })
+    return () => void chat.close()
+  }, [])
+
   return (
     <div className="p-4">
       <Card className="mt-16">
