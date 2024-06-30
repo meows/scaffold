@@ -4,8 +4,12 @@ import "./globals.css"
 import { ThemeProvider } from 'next-themes'
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 
+// -----------------------------------------------------------------------------
+// Internal
+
 import fonts from "~/app/font"
 import QueryProvider from "~/state/react-query"
+
 import { Toaster } from "#/ui/sonner"
 
 // —————————————————————————————————————————————————————————————————————————————
