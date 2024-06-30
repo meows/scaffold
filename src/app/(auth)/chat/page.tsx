@@ -61,6 +61,7 @@ export default function ChatPage() {
 
   useEffect(() => {
     chat.on("message", (message:unknown) => {
+      console.log("Received:", message)
       if (typeof message !== "string") return
       setMessages(state => state.concat(message))
     })
