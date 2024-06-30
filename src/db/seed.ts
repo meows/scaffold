@@ -41,11 +41,13 @@ const messages = messagesᐟ.map((message, id) => ({
 
 await db.insert(User)
   .values(users)
+  .onConflictDoNothing()
   .execute()
   .catch(throwError)
 
 await db.insert(Chat)
   .values(messages)
+  .onConflictDoNothing()
   .execute()
   .catch(throwError)
 
