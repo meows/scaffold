@@ -41,6 +41,7 @@ export default function ChatPage() {
   const onKeyDown = useCallback((e:KeyboardEvent) => {
     switch (e.key) {
       case "/":
+        if ($input.current === document.activeElement) return
         e.preventDefault()
         e.stopPropagation()
         $input.current?.focus()
