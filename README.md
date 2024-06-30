@@ -10,6 +10,11 @@ An integration of Elysia, Lucia, TanStack Query.
 
 ## Installation
 
+Copy environment variables and populate if necessary.
+```bash
+cp .env.example .env
+```
+
 Install JS dependencies.
 ```bash
 bun i
@@ -18,6 +23,11 @@ bun i
 Set the schema of the database.
 ```bash
 bun push
+```
+
+Seed database with initial data.
+```bash
+bun seed
 ```
 
 ## Development

@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "push": "bunx drizzle-kit push",
+    "seed": "bun run ./src/db/seed.ts",
     "studio": "bunx drizzle-kit studio",
     "server": "bun run --hot ./src/server/index.ts"
   },

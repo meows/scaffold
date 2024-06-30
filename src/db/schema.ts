@@ -24,7 +24,7 @@ export const Session = sqliteTable("session", {
 // —————————————————————————————————————————————————————————————————————————————
 // Chat
 
-export const Chat = sqliteTable("room", {
+export const Chat = sqliteTable("chat", {
   id:      integer("id").primaryKey(),
   author:  text("author").notNull().references(() => User.id),
   message: text("message").notNull(),
