@@ -27,7 +27,7 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<string[]>(mock_messages)
   const [input, setInput] = useState("")
   const $input = useRef<HTMLInputElement>(null)
-  const chat = useMemo(() => client.api.ws.subscribe(), [])
+  const chat = useMemo(() => client.ws.subscribe(), [])
 
   // ---- Handler ---- //
   const onSend = (e:React.FormEvent) => {
@@ -60,7 +60,7 @@ export default function ChatPage() {
   }, [chat])
 
   useEffect(() => {
-    chat.on("message", (message) => {
+    chat.on("message", (message:unknown) => {
       if (typeof message !== "string") return
       setMessages(state => state.concat(message))
     })

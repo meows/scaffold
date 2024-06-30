@@ -10,6 +10,7 @@ import { green } from "~/lib/console"
 import { API_PORT } from "~/constant/config"
 import user from "~/server/route/user"
 import hello from "~/server/route/hello"
+import { websocket } from "./route/ws"
 
 // —————————————————————————————————————————————————————————————————————————————
 // OpenAPI
@@ -28,18 +29,13 @@ const docs = swagger({
 // —————————————————————————————————————————————————————————————————————————————
 // Router
 
-const root = new Elysia<"/api">({ prefix: "/api" })
+const root = new Elysia()
   .use(cors())
   .use(serverTiming())
   .use(docs)
   .use(hello)
   .use(user)
-  .ws("/ws", {
-    message(ws, message) {
-      console.log("Received:", message)
-      ws.send(message)
-    },
-  })
+  .use(websocket)
   .listen(API_PORT)
 
 if (root.server) console.log(
