@@ -8,8 +8,10 @@ import { serverTiming } from "@elysiajs/server-timing"
 
 import { green } from "~/lib/console"
 import { API_PORT } from "~/constant/config"
-import user from "~/server/route/user"
-import hello from "~/server/route/hello"
+
+import hello     from "~/server/route/hello"
+import user      from "~/server/route/user"
+import websocket from "~/server/route/websocket"
 
 // —————————————————————————————————————————————————————————————————————————————
 // OpenAPI
@@ -28,18 +30,13 @@ const docs = swagger({
 // —————————————————————————————————————————————————————————————————————————————
 // Router
 
-const root = new Elysia<"/api">({ prefix: "/api" })
+const root = new Elysia()
   .use(cors())
   .use(serverTiming())
   .use(docs)
   .use(hello)
   .use(user)
-  .ws("/ws", {
-    message(ws, message) {
-      console.log("Received:", message)
-      ws.send(message)
-    },
-  })
+  .use(websocket)
   .listen(API_PORT)
 
 if (root.server) console.log(
@@ -49,5 +46,6 @@ if (root.server) console.log(
 // -----------------------------------------------------------------------------
 // Export
 
+/** Elysia type for root route. */
 export type App = typeof root
 // export default root

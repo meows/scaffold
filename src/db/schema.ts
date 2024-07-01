@@ -4,6 +4,9 @@ import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core"
 // —————————————————————————————————————————————————————————————————————————————
 // Environment
 
+const cascade = { onDelete: "cascade" } as const
+const nullify = { onDelete: "set null" } as const
+
 const time = (name:string) => integer(name, {mode:"timestamp"}).default(sql`CURRENT_TIMESTAMP`)
 
 // —————————————————————————————————————————————————————————————————————————————
@@ -17,16 +20,23 @@ export const User = sqliteTable("user", {
 
 export const Session = sqliteTable("session", {
   id:        text("id").primaryKey(),
-  userId:    text("user_id").notNull().references(() => User.id, { onDelete: "cascade" }),
+  userId:    text("user_id").notNull().references(() => User.id, cascade),
   expiresAt: integer("expires_at").notNull(),
 })
 
 // —————————————————————————————————————————————————————————————————————————————
 // Chat
 
+export const Room = sqliteTable("room", {
+  id:   integer("id").primaryKey(),
+  name: text("name").notNull(),
+  owner: text("owner").references(() => User.id, cascade),
+})
+
 export const Chat = sqliteTable("chat", {
   id:      integer("id").primaryKey(),
-  author:  text("author").notNull().references(() => User.id),
+  room:    integer("room").notNull().references(() => Room.id, cascade),
+  author:  text("author").references(() => User.id, nullify),
   message: text("message").notNull(),
   posted:  time("posted").notNull(),
 })
