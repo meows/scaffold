@@ -35,7 +35,7 @@ export default function ChatPage() {
     e.preventDefault()
     e.stopPropagation()
     if (input.length === 0) return
-    chat.send(input)
+    chat.send(String(input))
     setInput("")
   }
   const onInput = (e:React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)
