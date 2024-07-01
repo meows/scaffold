@@ -46,24 +46,32 @@ const chats = raw_chats.map((message, id) => ({
 // Insert Data
 
 await db.transaction(async (t) => {
-  await t.insert(User)
+  await t.delete(User).execute().catch(throwError)
+  await t.delete(Room).execute().catch(throwError)
+  await t.delete(Chat).execute().catch(throwError)
+
+  const rows_user = await t.insert(User)
     .values(users)
+    .returning()
     .onConflictDoNothing()
     .execute()
     .catch(throwError)
 
-  await t.insert(Room)
+  const rows_room = await t.insert(Room)
     .values(rooms)
+    .returning()
     .onConflictDoNothing()
     .execute()
     .catch(throwError)
 
-  await t.insert(Chat)
+  const rows_chat = await t.insert(Chat)
     .values(chats)
+    .returning()
     .onConflictDoNothing()
     .execute()
     .catch(throwError)
-})
 
-console.log(`${green("✓")} Inserted ${users.length} users.`)
-console.log(`${green("✓")} Inserted ${chats.length} messages.`)
+  console.log(`${green("✓")} Inserted ${rows_user?.length} users.`)
+  console.log(`${green("✓")} Inserted ${rows_room?.length} rooms.`)
+  console.log(`${green("✓")} Inserted ${rows_chat?.length} messages.`)
+}).catch(throwError)
