@@ -24,9 +24,15 @@ export const Session = sqliteTable("session", {
 // —————————————————————————————————————————————————————————————————————————————
 // Chat
 
+export const Room = sqliteTable("room", {
+  id:   integer("id").primaryKey(),
+  name: text("name").notNull(),
+})
+
 export const Chat = sqliteTable("chat", {
   id:      integer("id").primaryKey(),
-  author:  text("author").notNull().references(() => User.id),
+  room:    integer("room").notNull().references(() => Room.id, { onDelete: "cascade" }),
+  author:  text("author").references(() => User.id, { onDelete: "set null" }),
   message: text("message").notNull(),
   posted:  time("posted").notNull(),
 })
