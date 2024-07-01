@@ -6,6 +6,10 @@ import { randomNat } from "~/lib/random"
 import { green } from "~/lib/console"
 import { db } from "~/db/client"
 import { Chat, Room, User } from "~/db/schema"
+import { SQLiteTransaction } from "drizzle-orm/sqlite-core"
+import * as schema from "~/db/schema"
+import { ResultSet } from "@libsql/client"
+import { ExtractTableRelationsFromSchema, ExtractTablesWithRelations } from "drizzle-orm"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Mock Data
@@ -42,10 +46,13 @@ const chats = raw_chats.map((message, id) => ({
   room: rooms[randomNat(rooms.length)].id,
 }))
 
+type Schema = typeof schema
+type Transaction = SQLiteTransaction<"async", ResultSet, Schema, ExtractTablesWithRelations<Schema>>
+
 // —————————————————————————————————————————————————————————————————————————————
 // Insert Data
 
-await db.transaction(async (t) => {
+async function query(t:Transaction) {
   await t.delete(User).execute().catch(throwError)
   await t.delete(Room).execute().catch(throwError)
   await t.delete(Chat).execute().catch(throwError)
@@ -71,7 +78,11 @@ await db.transaction(async (t) => {
     .execute()
     .catch(throwError)
 
-  console.log(`${green("✓")} Inserted ${rows_user?.length} users.`)
-  console.log(`${green("✓")} Inserted ${rows_room?.length} rooms.`)
-  console.log(`${green("✓")} Inserted ${rows_chat?.length} messages.`)
-}).catch(throwError)
+  console.log(`${green("+")} inserted ${rows_user?.length} users`)
+  console.log(`${green("+")} inserted ${rows_room?.length} rooms`)
+  console.log(`${green("+")} inserted ${rows_chat?.length} messages`)
+}
+
+await db.transaction(query)
+  .catch(throwError)
+  .finally(() => console.log(`${green("✓")} database reset & seeded`))
