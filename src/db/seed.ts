@@ -10,12 +10,12 @@ import { Chat, Room, User } from "~/db/schema"
 // —————————————————————————————————————————————————————————————————————————————
 // Mock Data
 
-const usersᐟ = [
+const raw_users = [
   { email: "joe@gmail.com", password: "secret password" },
   { email: "bob@gmail.com", password: "secret password" },
 ]
 
-const chatsᐟ = [
+const raw_chats = [
   "Hello, world!",
   "How are you?",
   "What's up?",
@@ -23,36 +23,24 @@ const chatsᐟ = [
   "Good night!",
 ]
 
-const users = await Promise.all(usersᐟ.map(async ({ email, password }) => ({
+const users = await Promise.all(raw_users.map(async ({ email, password }) => ({
   email,
   hash: await argon2(password),
   id: generateId(15),
 })))
 
 const rooms = [
-  { name: "General", owner: users[0].id },
-  { name: "Random", owner: users[1].id },
+  { name: "General", owner: users[0].id, id:1 },
+  { name: "Random", owner: users[1].id, id:2 },
 ]
 
-const chats = chatsᐟ.map((message, id) => ({
+const chats = raw_chats.map((message, id) => ({
   id,
   author: users[randomNat(users.length)].id,
   message,
   posted: new Date(),
+  room: rooms[randomNat(rooms.length)].id,
 }))
-
-// export const Room = sqliteTable("room", {
-//   id:   integer("id").primaryKey(),
-//   name: text("name").notNull(),
-// })
-
-// export const Chat = sqliteTable("chat", {
-//   id:      integer("id").primaryKey(),
-//   room:    integer("room").notNull().references(() => Room.id, { onDelete: "cascade" }),
-//   author:  text("author").references(() => User.id, { onDelete: "set null" }),
-//   message: text("message").notNull(),
-//   posted:  time("posted").notNull(),
-// })
 
 // —————————————————————————————————————————————————————————————————————————————
 // Insert Data
