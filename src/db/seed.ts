@@ -5,7 +5,7 @@ import { throwError } from "~/lib/lambda"
 import { randomNat } from "~/lib/random"
 import { green } from "~/lib/console"
 import { db } from "~/db/client"
-import { Chat, User } from "~/db/schema"
+import { Chat, Room, User } from "~/db/schema"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Mock Data
@@ -28,6 +28,11 @@ const users = await Promise.all(usersᐟ.map(async ({ email, password }) => ({
   hash: await argon2(password),
   id: generateId(15),
 })))
+
+const rooms = [
+  { name: "General", owner: users[0].id },
+  { name: "Random", owner: users[1].id },
+]
 
 const chats = chatsᐟ.map((message, id) => ({
   id,
@@ -52,17 +57,25 @@ const chats = chatsᐟ.map((message, id) => ({
 // —————————————————————————————————————————————————————————————————————————————
 // Insert Data
 
-await db.insert(User)
-  .values(users)
-  .onConflictDoNothing()
-  .execute()
-  .catch(throwError)
+await db.transaction(async (t) => {
+  await t.insert(User)
+    .values(users)
+    .onConflictDoNothing()
+    .execute()
+    .catch(throwError)
 
-await db.insert(Chat)
-  .values(chats)
-  .onConflictDoNothing()
-  .execute()
-  .catch(throwError)
+  await t.insert(Room)
+    .values(rooms)
+    .onConflictDoNothing()
+    .execute()
+    .catch(throwError)
+
+  await t.insert(Chat)
+    .values(chats)
+    .onConflictDoNothing()
+    .execute()
+    .catch(throwError)
+})
 
 console.log(`${green("✓")} Inserted ${users.length} users.`)
 console.log(`${green("✓")} Inserted ${chats.length} messages.`)
