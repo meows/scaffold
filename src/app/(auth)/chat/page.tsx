@@ -32,9 +32,9 @@ export default function ChatPage() {
 
   // ---- Handler ---- //
   const onSend = (e:React.FormEvent) => {
-    if (input.length === 0) return
     e.preventDefault()
     e.stopPropagation()
+    if (input.length === 0) return
     chat.send(input)
     setInput("")
   }
