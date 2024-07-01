@@ -1,8 +1,12 @@
 import { eq } from "drizzle-orm"
-import Elysia, { t } from "elysia"
+import { Elysia, t } from "elysia"
+
+import { throwError } from "~/lib/lambda"
 import { db } from "~/db/client"
 import { Chat } from "~/db/schema"
-import { throwError } from "~/lib/lambda"
+
+// —————————————————————————————————————————————————————————————————————————————
+// Route :: Chat
 
 const chat = new Elysia({ prefix: "/chat" })
   .get("/:room", async (req) => {
@@ -11,7 +15,7 @@ const chat = new Elysia({ prefix: "/chat" })
       .from(Chat)
       .where(eq(Chat.room, Number(req.params.room)))
       .orderBy(Chat.posted)
-      .run()
+      .execute()
       .catch(throwError)
 
     return chats
