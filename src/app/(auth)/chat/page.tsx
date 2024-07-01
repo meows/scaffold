@@ -70,23 +70,21 @@ export default function ChatPage() {
   }, [])
 
   return (
-    <div className="p-4">
-      <Card className="mt-16">
-        <CardHeader className="font-bold text-2xl">Chat</CardHeader>
-        <CardContent>
-          <main className="grid gap-4">
-            <ul>
-              {messages.map((message, i) => <li key={i}>{message}</li>)}
-            </ul>
-            <form>
-              <fieldset className="flex gap-2">
-                <Input value={input} onChange={onInput} ref={$input} />
-                <Button onClick={onSend}>Send</Button>
-              </fieldset>
-            </form>
-          </main>
-        </CardContent>
-      </Card>
-    </div>
+    <Card>
+      <CardHeader className="font-bold text-2xl">Chat</CardHeader>
+      <CardContent>
+        <main className="grid gap-4">
+          <ul>
+            {messages.map((message, i) => <li key={i}>{message}</li>)}
+          </ul>
+          <form>
+            <fieldset className="flex gap-2">
+              <Input value={input} onChange={onInput} ref={$input} />
+              <Button onClick={onSend}>Send</Button>
+            </fieldset>
+          </form>
+        </main>
+      </CardContent>
+    </Card>
   )
 }
