@@ -1,13 +1,6 @@
 import { Elysia, t } from "elysia"
-import { hour } from "~/constant/time"
 
-const config = {
-  websocket: {
-    idleTimeout: hour,
-  },
-}
-
-const websocket = new Elysia(config)
+const websocket = new Elysia()
   .ws("/ws", {
     message(ws, message) {
       console.log("Received:", message)
