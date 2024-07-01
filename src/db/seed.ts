@@ -1,15 +1,17 @@
+import type { ExtractTablesWithRelations } from "drizzle-orm"
+import type { SQLiteTransaction } from "drizzle-orm/sqlite-core"
+import type { ResultSet } from "@libsql/client"
+
 import { generateId } from "lucia"
 import { hash as argon2 } from "@node-rs/argon2"
 
 import { throwError } from "~/lib/lambda"
 import { randomNat } from "~/lib/random"
 import { green } from "~/lib/console"
+
 import { db } from "~/db/client"
 import { Chat, Room, User } from "~/db/schema"
-import { SQLiteTransaction } from "drizzle-orm/sqlite-core"
 import * as schema from "~/db/schema"
-import { ResultSet } from "@libsql/client"
-import { ExtractTableRelationsFromSchema, ExtractTablesWithRelations } from "drizzle-orm"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Mock Data
