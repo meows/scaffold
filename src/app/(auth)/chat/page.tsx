@@ -18,6 +18,18 @@ const mock_messages = [
   "And you?",
   "I'm fine too.",
   "Goodbye.",
+  "Hello, world!",
+  "How are you?",
+  "I'm fine, thank you.",
+  "And you?",
+  "I'm fine too.",
+  "Goodbye.",
+  "Hello, world!",
+  "How are you?",
+  "I'm fine, thank you.",
+  "And you?",
+  "I'm fine too.",
+  "Goodbye.",
 ]
 
 // —————————————————————————————————————————————————————————————————————————————
@@ -70,20 +82,18 @@ export default function ChatPage() {
   }, [])
 
   return (
-    <Card>
+    <Card className="flex flex-1 flex-col">
       <CardHeader className="font-bold text-2xl">Chat</CardHeader>
-      <CardContent>
-        <main className="grid gap-4">
-          <ul>
-            {messages.map((message, i) => <li key={i}>{message}</li>)}
-          </ul>
-          <form>
-            <fieldset className="flex gap-2">
-              <Input value={input} onChange={onInput} ref={$input} />
-              <Button onClick={onSend}>Send</Button>
-            </fieldset>
-          </form>
-        </main>
+      <CardContent className="grid grid-rows-[1fr_auto] gap-4 overflow-y-auto">
+        <div className="flex flex-col gap-2">
+          {messages.map((m, i) => <span key={i}>{m}</span>)}
+        </div>
+        <form>
+          <fieldset className="flex gap-3">
+            <Input value={input} onChange={onInput} ref={$input} />
+            <Button onClick={onSend}>Send</Button>
+          </fieldset>
+        </form>
       </CardContent>
     </Card>
   )
