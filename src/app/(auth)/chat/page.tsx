@@ -2,7 +2,7 @@
 
 import client from "~/server/client"
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 import { Card, CardContent, CardHeader } from "#/ui/card"
 import { Button } from "#/ui/button"
@@ -36,18 +36,17 @@ const mock_messages = [
 // Page :: Chat
 
 export default function ChatPage() {
-  const [ws, setWs] = useState<WebSocket | null>(null)
+  const [ws, setWs] = useState(client.ws.subscribe())
   const [messages, setMessages] = useState<string[]>(mock_messages)
   const [input, setInput] = useState("")
   const $input = useRef<HTMLInputElement>(null)
-  const chat = useMemo(() => client.ws.subscribe(), [])
 
   // ---- Handler ---- //
   const onSend = (e:React.FormEvent) => {
     e.preventDefault()
     e.stopPropagation()
     if (input.length === 0) return
-    chat.send(String(input))
+    ws.send(String(input))
     setInput("")
   }
   const onInput = (e:React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)
@@ -71,14 +70,14 @@ export default function ChatPage() {
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown)
     return () => window.removeEventListener("keydown", onKeyDown)
-  }, [chat])
+  }, [ws])
 
   useEffect(() => {
-    chat.on("message", (message) => {
+    ws.on("message", (message) => {
       console.log("Received:", message)
       setMessages(state => state.concat(message.data))
     })
-    return () => void chat.close()
+    return () => void ws.close()
   }, [])
 
   return (
