@@ -81,19 +81,18 @@ export default function ChatPage() {
   }, [])
 
   return (
-    <Card className="flex flex-1 flex-col">
-      <CardHeader className="font-bold text-2xl">Chat</CardHeader>
-      <CardContent className="grid grid-rows-[1fr_auto] gap-4 overflow-y-auto">
-        <div className="flex flex-col gap-2">
-          {messages.map((m, i) => <span key={i}>{m}</span>)}
-        </div>
+    <article className="min-h-full">
+      <section className="grid gap-4">
+        <ul className="flex flex-col gap-2 overflow-y-auto">
+          {messages.map((m, i) => <li key={i}>{m}</li>)}
+        </ul>
         <form>
           <fieldset className="flex gap-3">
             <Input value={input} onChange={onInput} ref={$input} />
             <Button onClick={onSend}>Send</Button>
           </fieldset>
         </form>
-      </CardContent>
-    </Card>
+      </section>
+    </article>
   )
 }

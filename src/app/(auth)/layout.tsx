@@ -9,7 +9,7 @@ export default function AuthLayout({ children }: P) {
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-neutral-100 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100">
       <TopMenu />
-      <section className="p-4">
+      <section className="min-h-full p-4">
         {children}
       </section>
     </div>
