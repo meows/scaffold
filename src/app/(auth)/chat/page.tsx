@@ -32,9 +32,9 @@ const mock_messages = [
   "Goodbye.",
 ]
 
-async function getMessages() {
-  return client.chat({ room: "General" }).get()
-}
+// async function getMessages() {
+//   return client.chat({ room: "General" }).get()
+// }
 
 // —————————————————————————————————————————————————————————————————————————————
 // Page :: Chat
@@ -44,7 +44,7 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<string[]>(mock_messages)
   const [input, setInput] = useState("")
   const $input = useRef<HTMLInputElement>(null)
-  const meow = use(getMessages())
+  // const meow = use(getMessages())
 
   // ---- Handler ---- //
   const onSend = (e:React.FormEvent) => {
@@ -88,15 +88,15 @@ export default function ChatPage() {
   return (
     <article className="min-h-full">
       <section className="grid gap-4">
-        <ul className="flex flex-col gap-2 overflow-y-auto">
+        <ul className="flex flex-col gap-2 overflow-y-scroll">
           {messages.map((m, i) => <li key={i}>{m}</li>)}
         </ul>
-        <div>
-          <div className="flex gap-3">
+        <form>
+          <fieldset className="flex gap-3">
             <Input value={input} onChange={onInput} ref={$input} />
             <Button onClick={onSend}>Send</Button>
-          </div>
-        </div>
+          </fieldset>
+        </form>
       </section>
     </article>
   )
