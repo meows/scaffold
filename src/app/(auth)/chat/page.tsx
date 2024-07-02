@@ -91,12 +91,12 @@ export default function ChatPage() {
         <ul className="flex flex-col gap-2 overflow-y-auto">
           {messages.map((m, i) => <li key={i}>{m}</li>)}
         </ul>
-        <form>
-          <fieldset className="flex gap-3">
+        <div>
+          <div className="flex gap-3">
             <Input value={input} onChange={onInput} ref={$input} />
             <Button onClick={onSend}>Send</Button>
-          </fieldset>
-        </form>
+          </div>
+        </div>
       </section>
     </article>
   )
