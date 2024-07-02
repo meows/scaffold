@@ -12,6 +12,7 @@ import { API_PORT } from "~/constant/config"
 import hello     from "~/server/route/hello"
 import user      from "~/server/route/user"
 import websocket from "~/server/route/websocket"
+import chat from "./route/chat"
 
 // —————————————————————————————————————————————————————————————————————————————
 // OpenAPI
@@ -36,6 +37,7 @@ const root = new Elysia()
   .use(docs)
   .use(hello)
   .use(user)
+  .use(chat)
   .use(websocket)
   .listen(API_PORT)
 

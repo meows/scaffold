@@ -28,8 +28,8 @@ export const Session = sqliteTable("session", {
 // Chat
 
 export const Room = sqliteTable("room", {
-  id:   integer("id").primaryKey(),
-  name: text("name").notNull(),
+  id:    integer("id").primaryKey(),
+  name:  text("name").notNull(),
   owner: text("owner").references(() => User.id, cascade),
 })
 

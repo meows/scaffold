@@ -2,7 +2,7 @@
 
 import client from "~/server/client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
+import { Suspense, use, useCallback, useEffect, useRef, useState } from "react"
 
 import { Card, CardContent, CardHeader } from "#/ui/card"
 import { Button } from "#/ui/button"
@@ -32,6 +32,10 @@ const mock_messages = [
   "Goodbye.",
 ]
 
+async function getMessages() {
+  return client.chat({ room: "General" }).get()
+}
+
 // —————————————————————————————————————————————————————————————————————————————
 // Page :: Chat
 
@@ -40,6 +44,7 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<string[]>(mock_messages)
   const [input, setInput] = useState("")
   const $input = useRef<HTMLInputElement>(null)
+  const meow = use(getMessages())
 
   // ---- Handler ---- //
   const onSend = (e:React.FormEvent) => {
