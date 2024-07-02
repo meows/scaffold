@@ -8,7 +8,7 @@ import client from "~/server/client"
 // Environment
 
 async function queryFn() {
-  const query = await client.api.user.whoami.get()
+  const query = await client.user.whoami.get()
 }
 
 // —————————————————————————————————————————————————————————————————————————————
@@ -17,7 +17,7 @@ async function queryFn() {
 export default function Home() {
   const { data, error, isLoading, isError } = useQuery({
     queryKey: ["hello"],
-    queryFn: async () => client.api.user.whoami.get(),
+    queryFn: async () => client.user.whoami.get(),
     retry: (failed, err) => failed < 3 && err.cause !== 500,
   })
 
