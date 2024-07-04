@@ -25,7 +25,7 @@ export default function RootLayout({ children }: P) {
         <QueryProvider>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             {children}
-            <ReactQueryDevtools initialIsOpen />
+            {/* <ReactQueryDevtools initialIsOpen /> */}
             <Toaster duration={5000} richColors position="bottom-center" />
           </ThemeProvider>
         </QueryProvider>
