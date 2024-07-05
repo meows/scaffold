@@ -1,0 +1,19 @@
+main > header {
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  background-color: cadetblue;
+}
+
+#ChatComponent {
+  padding: 1rem;
+  form {
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  }
+}
