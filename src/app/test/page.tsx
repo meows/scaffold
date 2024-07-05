@@ -87,13 +87,13 @@ function ChatComponent() {
 
   return (
     <section id="ChatComponent">
-      <div className="flex-1 overflow-y-auto">
+      <article>
         {messages.map((message, i) => (
           <div key={i} className="p-2">
             {message}
           </div>
         ))}
-      </div>
+      </article>
       <form onSubmit={onSend}>
         <input ref={$input} value={input} onChange={onInput} />
         <Button type="submit" className="p-2">Send</Button>

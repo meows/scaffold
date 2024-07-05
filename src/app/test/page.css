@@ -3,6 +3,7 @@ main {
   grid-template-rows: auto 1fr;
   background-color: rgb(5, 5, 133);
   height: 100vh;
+  overflow: hidden;
 }
 
 main > header {
@@ -17,7 +18,14 @@ main > header {
   padding: 1rem;
   display: grid;
   grid-template-rows: 1fr auto;
+  gap: 1rem;
+
+  article {
+    overflow-y: scroll;
+  }
+
   form {
+    position: sticky;
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 1.5rem;
