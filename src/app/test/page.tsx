@@ -3,6 +3,7 @@ import client from "~/server/client"
 import "./page.css"
 
 import { useCallback, useEffect, useRef, useState } from "react"
+import { Button } from "~/component/ui/button"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Environment
@@ -95,9 +96,8 @@ function ChatComponent() {
       </div>
       <form onSubmit={onSend}>
         <input ref={$input} value={input} onChange={onInput} />
-        <button type="submit" className="p-2">Send</button>
+        <Button type="submit" className="p-2">Send</Button>
       </form>
     </section>
-
   )
 }
