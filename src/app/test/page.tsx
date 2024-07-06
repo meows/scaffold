@@ -44,6 +44,7 @@ function ChatComponent() {
   const [messages, setMessages] = useState<string[]>(mock_messages)
   const [input, setInput] = useState("")
   const $input = useRef<HTMLInputElement>(null)
+  const $chat = useRef<HTMLDivElement>(null)
 
   const onSend = (e:React.FormEvent) => {
     e.preventDefault()
@@ -85,9 +86,13 @@ function ChatComponent() {
     return () => void ws.close()
   }, [])
 
+  useEffect(() => {
+    $chat.current?.scrollTo(0, $chat.current.scrollHeight)
+  }, [messages])
+
   return (
     <section id="ChatComponent">
-      <article>
+      <article ref={$chat} className="p-2">
         {messages.map((message, i) => (
           <div key={i} className="p-2">
             {message}
