@@ -4,6 +4,7 @@ import "./page.css"
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Button } from "~/component/ui/button"
+import ThemeSwitch from "~/component/ThemeSwitch"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Environment
@@ -31,8 +32,8 @@ export default function Page() {
   return (
     <main id="Test">
       <header>
-        <span>Left</span>
-        <span>Right</span>
+        <span>Hello</span>
+        <ThemeSwitch />
       </header>
       <ChatComponent />
     </main>

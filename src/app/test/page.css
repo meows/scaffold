@@ -11,7 +11,7 @@ main > header {
   text-align: center;
   display: flex;
   justify-content: space-between;
-  background-color: cadetblue;
+  background-color: var(--popover-foreground);
 }
 
 #ChatComponent {

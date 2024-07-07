@@ -23,7 +23,7 @@ type P = React.ComponentProps<typeof DropdownMenu>
 // Component
 
 /** A small sun or moon icon to trigger color theme. */
-export default function ThemeButton(props: P) {
+export default function ThemeSwitch(props: P) {
   const { setTheme, resolvedTheme, theme } = useTheme()
 
   const toLight = () => {
