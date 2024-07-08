@@ -1,0 +1,21 @@
+# Save this as dragonfly-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dragonfly-pod
+spec:
+  containers:
+    - name: dragonfly
+      image: docker.dragonflydb.io/dragonflydb/dragonfly
+      ports:
+        - containerPort: 6379
+          hostPort: 6379
+      volumeMounts:
+        - name: dragonflydata
+          mountPath: /data
+      securityContext:
+        capabilities:
+          add: ["IPC_LOCK"]
+  volumes:
+    - name: dragonflydata
+      emptyDir: {}

@@ -1,12 +1,10 @@
 "use client"
-
 import client from "~/server/client"
+import "./page.css"
 
-import { Suspense, use, useCallback, useEffect, useRef, useState } from "react"
-
-import { Card, CardContent, CardHeader } from "#/ui/card"
-import { Button } from "#/ui/button"
-import { Input } from "#/ui/input"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { Button } from "~/component/ui/button"
+import ThemeSwitch from "~/component/ThemeSwitch"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Environment
@@ -25,28 +23,30 @@ const mock_messages = [
   "I'm fine too.",
   "Goodbye.",
   "Hello, world!",
-  "How are you?",
-  "I'm fine, thank you.",
-  "And you?",
-  "I'm fine too.",
-  "Goodbye.",
 ]
 
-// async function getMessages() {
-//   return client.chat({ room: "General" }).get()
-// }
-
 // —————————————————————————————————————————————————————————————————————————————
-// Page :: Chat
+// Page :: Test
 
-export default function ChatPage() {
+export default function Page() {
+  return (
+    <main id="Test">
+      <header>
+        <span>Hello</span>
+        <ThemeSwitch />
+      </header>
+      <ChatComponent />
+    </main>
+  )
+}
+
+function ChatComponent() {
   const [ws, setWs] = useState(client.ws.subscribe())
   const [messages, setMessages] = useState<string[]>(mock_messages)
   const [input, setInput] = useState("")
   const $input = useRef<HTMLInputElement>(null)
-  // const meow = use(getMessages())
+  const $chat = useRef<HTMLDivElement>(null)
 
-  // ---- Handler ---- //
   const onSend = (e:React.FormEvent) => {
     e.preventDefault()
     e.stopPropagation()
@@ -54,7 +54,9 @@ export default function ChatPage() {
     ws.send(String(input))
     setInput("")
   }
+
   const onInput = (e:React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)
+
   const onKeyDown = useCallback((e:KeyboardEvent) => {
     switch (e.key) {
       case "/":
@@ -85,19 +87,23 @@ export default function ChatPage() {
     return () => void ws.close()
   }, [])
 
+  useEffect(() => {
+    $chat.current?.scrollTo(0, $chat.current.scrollHeight)
+  }, [messages])
+
   return (
-    <Card className="h-full">
-      <CardContent className="p-4">
-        <section className="grid grid-rows-[1fr_auto] gap-4 overflow-y-auto">
-          <div className="grid max-h-full gap-2 overflow-y-auto break-words">
-            {messages.map((m, i) => <span key={i}>{m}</span>)}
+    <section id="ChatComponent">
+      <article ref={$chat} className="p-2">
+        {messages.map((message, i) => (
+          <div key={i} className="p-2">
+            {message}
           </div>
-          <div className="grid grid-cols-[1fr_auto] gap-2">
-            <Input value={input} onChange={onInput} ref={$input} />
-            <Button onClick={onSend}>Send</Button>
-          </div>
-        </section>
-      </CardContent>
-    </Card>
+        ))}
+      </article>
+      <form onSubmit={onSend}>
+        <input ref={$input} value={input} onChange={onInput} />
+        <Button type="submit" className="p-2">Send</Button>
+      </form>
+    </section>
   )
 }
