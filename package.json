@@ -8,10 +8,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+
     "push": "bunx drizzle-kit push",
     "seed": "bun run ./src/db/seed.ts",
     "studio": "bunx drizzle-kit studio",
-    "server": "bun run --hot ./src/server/index.ts"
+    "server": "bun run --hot ./src/server/index.ts",
+
+    "panda-start": "rpk container start -n 3",
+    "panda-stop": "rpk container stop"
   },
   "dependencies": {
     "@elysiajs/bearer": "^1.0.2",
