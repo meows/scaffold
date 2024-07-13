@@ -1,5 +1,5 @@
 import { Kafka } from "kafkajs"
-import { endpoint } from "~/queue/config"
+import { endpoint } from "~/panda/config"
 
 const redpanda = new Kafka({
   brokers: [endpoint],

@@ -1,1 +1,0 @@
-export const endpoint = process.env.KAFKA_ENDPOINT || "localhost:9092"
