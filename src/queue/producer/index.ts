@@ -4,6 +4,7 @@ import { endpoint } from "~/queue/config"
 const redpanda = new Kafka({
   brokers: [endpoint],
 })
+
 const producer = redpanda.producer()
 
 export async function getConnection(user: string) {
@@ -15,15 +16,18 @@ export async function getConnection(user: string) {
         messages: [{ value: JSON.stringify({ message, user }) }],
       })
     }
-  } catch (error) {
-    console.error("Error:", error)
+  } 
+  catch (err) {
+    console.error("Error:", err)
   }
 }
 
 export async function disconnect() {
   try {
     await producer.disconnect()
-  } catch (error) {
-    console.error("Error:", error)
+  }
+
+  catch (err) {
+    console.error("Error:", err)
   }
 }
