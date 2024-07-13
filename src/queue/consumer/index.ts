@@ -1,13 +1,21 @@
 import { Kafka } from "kafkajs"
 import { nanoid } from "nanoid"
 
-const endpoint = process.env.KAFKA_ENDPOINT || "localhost:9092"
+import { STREAM_URL } from "~/env"
+
+// —————————————————————————————————————————————————————————————————————————————
+// Environment
+
+const endpoint = STREAM_URL
 
 const panda = new Kafka({
   brokers: [endpoint],
 })
 
 const consumer = panda.consumer({ groupId: nanoid() })
+
+// —————————————————————————————————————————————————————————————————————————————
+// Consumer
 
 export async function connect() {
   try {
