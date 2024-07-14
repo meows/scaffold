@@ -50,4 +50,5 @@ if (root.server) console.log(
 
 /** Elysia type for root route. */
 export type App = typeof root
+
 // export default root
