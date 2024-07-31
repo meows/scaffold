@@ -45,6 +45,10 @@ if (root.server) console.log(
   `${green("✓")} Server running on ${root.server.hostname}:${root.server.port}.`
 )
 
+process.on("SIGINT", () => {
+  console.log("Closing app...")
+})
+
 // -----------------------------------------------------------------------------
 // Export
 
