@@ -69,8 +69,23 @@ if (root.server) console.log(
   `${green("✓")} Server running on ${root.server.hostname}:${root.server.port}.`
 )
 
-process.on("SIGINT", () => {
+process.on("SIGINT", async () => {
   console.log("Closing app...")
+
+  try {
+    await Producer.disconnect()
+    await Consumer.disconnect()
+  }
+
+  catch (err) {
+    console.error("Error during cleanup:", err)
+    process.exit(1)
+  }
+
+  finally {
+    console.log("Cleanup finished. Exiting")
+    process.exit(0)
+  }
 })
 
 // -----------------------------------------------------------------------------
