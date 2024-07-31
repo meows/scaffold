@@ -11,8 +11,8 @@ import { API_PORT } from "~/constant/config"
 
 import hello     from "~/server/route/hello"
 import user      from "~/server/route/user"
+import chat      from "~/server/route/chat"
 import websocket from "~/server/route/websocket"
-import chat from "./route/chat"
 
 // —————————————————————————————————————————————————————————————————————————————
 // OpenAPI
@@ -45,9 +45,14 @@ if (root.server) console.log(
   `${green("✓")} Server running on ${root.server.hostname}:${root.server.port}.`
 )
 
+process.on("SIGINT", () => {
+  console.log("Closing app...")
+})
+
 // -----------------------------------------------------------------------------
 // Export
 
 /** Elysia type for root route. */
 export type App = typeof root
+
 // export default root

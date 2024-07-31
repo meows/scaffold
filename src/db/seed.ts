@@ -33,6 +33,7 @@ const users = await Promise.all(raw_users.map(async ({ email, password }) => ({
   email,
   hash: await argon2(password),
   id: generateId(15),
+  username: email,
 })))
 
 const rooms = [

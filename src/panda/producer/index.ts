@@ -1,11 +1,17 @@
 import { Kafka } from "kafkajs"
-import { endpoint } from "~/panda/config"
+import { STREAM_URL } from "~/env"
+
+// —————————————————————————————————————————————————————————————————————————————
+// Environment
 
 const redpanda = new Kafka({
-  brokers: [endpoint],
+  brokers: [STREAM_URL],
 })
 
 const producer = redpanda.producer()
+
+// —————————————————————————————————————————————————————————————————————————————
+// Producer
 
 export async function getConnection(user: string) {
   try {
@@ -16,18 +22,12 @@ export async function getConnection(user: string) {
         messages: [{ value: JSON.stringify({ message, user }) }],
       })
     }
-  } 
-  catch (err) {
-    console.error("Error:", err)
   }
+
+  catch (err) { console.error("Error:", err) }
 }
 
 export async function disconnect() {
-  try {
-    await producer.disconnect()
-  }
-
-  catch (err) {
-    console.error("Error:", err)
-  }
+  try { await producer.disconnect() }
+  catch (err) { console.error("Error:", err) }
 }

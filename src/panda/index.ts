@@ -11,8 +11,9 @@ const rl = readline.createInterface({
   output: process.stdout,
 })
 
+const topic = "chat"
+
 async function start() {
-  const topic = "chat-room"
   console.log(`Creating topic: ${topic}`)
   await Admin.createTopic(topic)
   console.log("Connecting...")
@@ -25,9 +26,8 @@ async function start() {
         readline.moveCursor(process.stdout, 0, -1)
         sendMessage(input)
       })
-    } else {
-      console.error("Failed to initialize sendMessage function")
     }
+    else console.error("Failed to initialize sendMessage function")
   })
 }
 

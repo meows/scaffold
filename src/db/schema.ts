@@ -13,11 +13,11 @@ const time = (name:string) => integer(name, {mode:"timestamp"}).default(sql`CURR
 // Account
 
 export const User = sqliteTable("user", {
-  id:    text("id").primaryKey(),
-  email: text("email").unique().notNull(),
-  hash:  text("hash").notNull(),
+  id:        text("id").primaryKey(),
+  email:     text("email").unique().notNull(),
+  hash:      text("hash").notNull(),
   github_id: integer("github_id").unique(),
-  username: text("username").unique().notNull(),
+  username:  text("username").unique().notNull(),
 })
 
 export const Session = sqliteTable("session", {
