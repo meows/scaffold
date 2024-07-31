@@ -3,9 +3,6 @@ import { cors } from "@elysiajs/cors"
 import { swagger } from "@elysiajs/swagger"
 import { serverTiming } from "@elysiajs/server-timing"
 
-// -----------------------------------------------------------------------------
-// Internal
-
 import { green } from "~/lib/console"
 import { API_PORT } from "~/constant/config"
 
@@ -14,7 +11,34 @@ import user      from "~/server/route/user"
 import chat      from "~/server/route/chat"
 import websocket from "~/server/route/websocket"
 
+import * as Admin    from "~/panda/admin"
+import * as Producer from "~/panda/producer"
+import * as Consumer from "~/panda/consumer"
+
 // —————————————————————————————————————————————————————————————————————————————
+// Environment
+
+const topic = "chat"
+
+// async function start() {
+//   console.log(`Creating topic: ${topic}`)
+//   await Admin.createTopic(topic)
+//   console.log("Connecting...")
+//   await Consumer.connect()
+//   rl.question("Enter user name: \n", async function (username) {
+//     const sendMessage = await Producer.getConnection(username)
+//     if (sendMessage) {
+//       console.log("Connected, press Ctrl+C to exit")
+//       rl.on("line", input => {
+//         readline.moveCursor(process.stdout, 0, -1)
+//         sendMessage(input)
+//       })
+//     }
+//     else console.error("Failed to initialize sendMessage function")
+//   })
+// }
+
+// -----------------------------------------------------------------------------
 // OpenAPI
 
 // https://elysiajs.com/plugins/swagger.html

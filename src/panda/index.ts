@@ -1,7 +1,7 @@
 import * as readline from "node:readline"
-import * as Admin    from "./admin"
-import * as Producer from "./producer"
-import * as Consumer from "./consumer"
+import * as Admin    from "~/panda/admin"
+import * as Producer from "~/panda/producer"
+import * as Consumer from "~/panda/consumer"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Environment
