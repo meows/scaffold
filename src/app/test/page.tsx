@@ -1,6 +1,7 @@
 "use client"
-import client from "~/server/client"
 import "./page.css"
+
+import client from "~/server/client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Button } from "~/component/ui/button"
