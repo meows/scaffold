@@ -1,11 +1,12 @@
 "use client"
 import "./page.css"
 
+import { useCallback, useEffect, useRef, useState } from "react"
+
 import client from "~/server/client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
-import { Button } from "~/component/ui/button"
-import ThemeSwitch from "~/component/ThemeSwitch"
+import { Button } from "#/ui/button"
+import ThemeSwitch from "#/ThemeSwitch"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Environment
