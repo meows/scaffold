@@ -15,8 +15,7 @@ const time = (name:string) => integer(name, {mode:"timestamp"}).default(sql`CURR
 export const User = sqliteTable("user", {
   id:        text("id").primaryKey(),
   email:     text("email").unique().notNull(),
-  hash:      text("hash").notNull(),
-  github_id: integer("github_id").unique(),
+  hash:      text("password_hash").notNull(),
   username:  text("username").unique().notNull(),
 })
 
