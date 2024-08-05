@@ -24,7 +24,7 @@ import FieldInfo from "#/form/FieldInfo"
 // Environment
 
 async function mutationFn() {
-  const { data, error, status } = await client.api.user.create.post({
+  const { data, error, status } = await client.user.create.post({
     email: "sara@gmail.com",
     password: "password"
   })
