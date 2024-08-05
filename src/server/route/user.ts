@@ -60,7 +60,7 @@ const user = new Elysia<"/user">({ prefix: "/user" })
     const id = generateId(15)
     const row = await db
       .insert(User)
-      .values({ email, hash, id })
+      .values({ email, hash, id, username: email })
       .returning()
       .execute()
       .catch(err => { throw err })
