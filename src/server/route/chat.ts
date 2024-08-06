@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm"
 import { Elysia, t } from "elysia"
 
-import { throwError } from "~/lib/lambda"
+import { throwErr } from "~/lib/lambda"
 import { db } from "~/db/client"
 import { Chat, Room } from "~/db/schema"
 
@@ -30,7 +30,7 @@ const chat = new Elysia({ prefix: "/chat" })
       .where(eq(Chat.room, room.name))
       .orderBy(Chat.posted)
       .execute()
-      .catch(throwError)
+      .catch(throwErr)
 
     return chats
   })

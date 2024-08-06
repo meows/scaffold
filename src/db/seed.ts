@@ -5,7 +5,7 @@ import type { ResultSet } from "@libsql/client"
 import { generateId } from "lucia"
 import { hash as argon2 } from "@node-rs/argon2"
 
-import { throwError } from "~/lib/lambda"
+import { throwErr } from "~/lib/lambda"
 import { randomNat } from "~/lib/random"
 import { green } from "~/lib/console"
 
@@ -56,30 +56,30 @@ type Transaction = SQLiteTransaction<"async", ResultSet, Schema, ExtractTablesWi
 // Insert Data
 
 async function query(t:Transaction) {
-  await t.delete(User).execute().catch(throwError)
-  await t.delete(Room).execute().catch(throwError)
-  await t.delete(Chat).execute().catch(throwError)
+  await t.delete(User).execute().catch(throwErr)
+  await t.delete(Room).execute().catch(throwErr)
+  await t.delete(Chat).execute().catch(throwErr)
 
   const rows_user = await t.insert(User)
     .values(users)
     .returning()
     .onConflictDoNothing()
     .execute()
-    .catch(throwError)
+    .catch(throwErr)
 
   const rows_room = await t.insert(Room)
     .values(rooms)
     .returning()
     .onConflictDoNothing()
     .execute()
-    .catch(throwError)
+    .catch(throwErr)
 
   const rows_chat = await t.insert(Chat)
     .values(chats)
     .returning()
     .onConflictDoNothing()
     .execute()
-    .catch(throwError)
+    .catch(throwErr)
 
   console.log(`${green("+")} inserted ${rows_user?.length} users`)
   console.log(`${green("+")} inserted ${rows_room?.length} rooms`)
@@ -87,5 +87,5 @@ async function query(t:Transaction) {
 }
 
 await db.transaction(query)
-  .catch(throwError)
+  .catch(throwErr)
   .finally(() => console.log(`${green("✓")} database reset & seeded`))

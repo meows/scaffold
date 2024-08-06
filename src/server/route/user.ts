@@ -3,12 +3,12 @@ import { Elysia, redirect, t } from "elysia"
 import { generateId } from "lucia"
 import { hash as argon2, verify } from "@node-rs/argon2"
 
+import { throwErr } from "~/lib/lambda"
 import { db } from "~/db/client"
 import { User } from "~/db/schema"
 import { config_hash } from "~/auth/config"
 import lucia from "~/auth/lucia"
 import ServiceAuth from "~/server/service/auth"
-import { throwErr } from "~/lib/lambda"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Environment

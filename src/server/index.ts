@@ -55,15 +55,15 @@ const docs = swagger({
 // —————————————————————————————————————————————————————————————————————————————
 // Router
 
-const root = new Elysia()
-  .use(cors())
+const root = new Elysia({ prefix: "/api" })
+  // .use(cors())
   .use(serverTiming())
   .use(docs)
   .use(hello)
   .use(user)
   .use(chat)
   .use(websocket)
-  .listen(API_PORT)
+  // .listen(API_PORT)
 
 if (root.server) console.log(
   `${green("✓")} Server running on ${root.server.hostname}:${root.server.port}.`
@@ -94,4 +94,4 @@ process.on("SIGINT", async () => {
 /** Elysia type for root route. */
 export type App = typeof root
 
-// export default root
+export default root
