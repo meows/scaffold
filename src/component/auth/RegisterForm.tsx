@@ -24,7 +24,7 @@ import FieldInfo from "#/form/FieldInfo"
 // Environment
 
 async function mutationFn() {
-  const { data, error, status } = await client.api.user.create.post({
+  const { data, error, status } = await client.user.create.post({
     email: "sara@gmail.com",
     password: "password"
   })
@@ -49,10 +49,11 @@ export function RegisterForm() {
     defaultValues,
     validatorAdapter: valibotValidator(),
     onSubmit: async ({ value: { email, password } }) => {
-      const { data, error, status } = await client.api.user.create.post({ email, password })
+      const { data, error, status } = await client.user.create.post({ email, password })
+      console.log({ data, error, status })
       if (500 <= status && status < 600) throw Error(
         (error?.value as string) ?? "Internal Server Error.",
-        { cause: status, }
+        { cause: status }
       )
     },
   })

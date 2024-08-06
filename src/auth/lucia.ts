@@ -17,7 +17,6 @@ const lucia = new Lucia(adapter, {
   // https://lucia-auth.com/tutorials/username-and-password/nextjs-app
   getUserAttributes: (attributes) => ({
     username: attributes.username,
-    githubId: attributes.github_id,
   })
 })
 
@@ -30,7 +29,6 @@ declare module "lucia" {
 
 interface DatabaseUserAttributes {
   username: string
-  github_id: number
 }
 
 export default lucia

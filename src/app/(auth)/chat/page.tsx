@@ -2,7 +2,7 @@
 
 import client from "~/server/client"
 
-import { Suspense, use, useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 import { Card, CardContent, CardHeader } from "#/ui/card"
 import { Button } from "#/ui/button"

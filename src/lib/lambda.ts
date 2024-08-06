@@ -1,3 +1,3 @@
-export function throwError(err: Error) {
+export function throwErr(err: Error): never {
   throw err
 }

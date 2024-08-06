@@ -1,3 +1,5 @@
+"use client"
+
 import ThemeSwitch from "#/ThemeSwitch"
 
 type P = Readonly<{ children: React.ReactNode }>

@@ -12,6 +12,11 @@ const nextConfig = {
     // https://web.dev/articles/vitals
     webVitalsAttribution: ["CLS", "LCP", "INP"],
   },
+  // https://nextjs.org/docs/api-reference/next.config.js/dev-indicators
+  devIndicators: {
+    buildActivity: false,
+    buildActivityPosition: "top-left",
+  },
 }
 
 export default nextConfig

@@ -33,7 +33,7 @@ export function LoginForm() {
     defaultValues,
     validatorAdapter: valibotValidator(),
     onSubmit: async ({ value: { email, password } }) => {
-      const { data, error, status } = await client.api.user.login.post({ email, password })
+      const { data, error, status } = await client.user.login.post({ email, password })
       if (500 <= status && status < 600) throw Error(
         (error?.value as string) ?? "Internal Server Error.",
         { cause: status, }
