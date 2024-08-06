@@ -8,6 +8,7 @@ import { User } from "~/db/schema"
 import { config_hash } from "~/auth/config"
 import lucia from "~/auth/lucia"
 import ServiceAuth from "~/server/service/auth"
+import { throwErr } from "~/lib/lambda"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Environment
@@ -63,7 +64,7 @@ const user = new Elysia<"/user">({ prefix: "/user" })
       .values({ email, hash, id, username: email })
       .returning()
       .execute()
-      .catch(err => { throw err })
+      .catch(throwErr)
     const session = await lucia.createSession(id, {})
     const { name, value, attributes } = lucia.createSessionCookie(session.id)
     req.cookie[name].set({ value, ...attributes })
@@ -77,6 +78,7 @@ const user = new Elysia<"/user">({ prefix: "/user" })
       .where(eq(User.email, email))
       .limit(1)
       .execute()
+      .catch(throwErr)
     if (!rows.length) throw Error("User does not exist.")
     const user = rows.at(0)!
     const match = await verify(user.hash, password)
