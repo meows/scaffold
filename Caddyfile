@@ -1,0 +1,21 @@
+{
+	log {
+		level INFO
+	}
+}
+
+localhost:3000 {
+	# Next.js
+	reverse_proxy {
+		to 127.0.0.1:3000
+		header_up Host {host}
+		header_up X-Real-IP {remote}
+		header_up X-Forwarded-For {remote}
+		header_up X-Forwarded-Proto {scheme}
+	}
+
+	# API server
+	handle_path /api/* {
+		reverse_proxy 127.0.0.1:3333
+	}
+}
