@@ -15,4 +15,7 @@ export const DATABASE_URL = parse(string(), process.env.DATABASE_URL)
 export const STREAM_URL   = parse(is_url, process.env.STREAM_URL)
 
 /** API server endpoint. */
-export const SERVER_URL   = parse(is_url, process.env.SERVER_URL)
+export const API_URL   = parse(is_url, process.env.API_URL)
+
+/** Next server endpoint. */
+export const NEXT_URL   = parse(is_url, process.env.NEXT_URL)

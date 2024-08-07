@@ -1,0 +1,10 @@
+{
+	log {
+		level INFO
+	}
+}
+
+localhost:5555 {
+	reverse_proxy /eden/* 127.0.0.1:3333
+	reverse_proxy * 127.0.0.1:3000
+}

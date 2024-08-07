@@ -11,7 +11,7 @@ import { API_URL } from "~/constant/config"
  * @example
  * const { data } = await client.api.hello({ name: "world" }).get()
  */
-const client = treaty<App>(API_URL)
+const client = treaty<App>("https://localhost:5555/eden")
 
 // -----------------------------------------------------------------------------
 // Export
