@@ -15,7 +15,7 @@ localhost:3000 {
 	}
 
 	# API server
-	handle_path /api/* {
+	handle_path /eden/* {
 		reverse_proxy 127.0.0.1:3333
 	}
 }
