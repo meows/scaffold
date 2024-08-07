@@ -7,6 +7,7 @@ An integration of Elysia, Lucia, TanStack Query.
 ## Dependencies
 
 - [Bun]
+- [Caddy]
 
 ## Installation
 
@@ -30,11 +31,24 @@ Seed database with initial data.
 bun seed
 ```
 
+> ![Note]
+> You can repeatedly run the `bun seed` command to idempotently reset the database.
+
 ## Development
 
-Launch the dev server.
+Launch the Next server.
 ```bash
 bun dev
+```
+
+Launch the API server.
+```bash
+bun server
+```
+
+Launch the application gateway.
+```bash
+bun gateway
 ```
 
 Launch the DB viewer (optional).
@@ -42,4 +56,5 @@ Launch the DB viewer (optional).
 bun studio
 ```
 
-[Bun]: https://bun.sh
+[Bun]: https://bun.sh/docs/installation
+[Caddy]: https://caddyserver.com/docs/install
