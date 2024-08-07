@@ -31,8 +31,8 @@ Seed database with initial data.
 bun seed
 ```
 
-> ![TIP]
-> You can repeatedly run the `bun seed` command to idempotently reset the database.
+> [!TIP]
+> You can repeatedly run `bun seed` to idempotently reset the database.
 
 ## Development
 
