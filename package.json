@@ -13,7 +13,8 @@
     "studio": "bunx drizzle-kit studio",
     "server": "bun run --hot ./src/server/index.ts",
     "panda-start": "rpk container start -n 3",
-    "panda-stop": "rpk container stop"
+    "panda-stop": "rpk container stop",
+    "proxy": "caddy run"
   },
   "dependencies": {
     "@elysiajs/bearer": "^1.1.1",
