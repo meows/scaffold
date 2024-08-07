@@ -5,13 +5,6 @@
 }
 
 localhost:5555 {
-	# Next.js
-	reverse_proxy {
-		to 127.0.0.1:3000
-	}
-
-	# API server
-	handle_path /eden/* {
-		reverse_proxy 127.0.0.1:3333
-	}
+	reverse_proxy /eden/* 127.0.0.1:3333
+	reverse_proxy * 127.0.0.1:3000
 }

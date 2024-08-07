@@ -55,7 +55,7 @@ const docs = swagger({
 // —————————————————————————————————————————————————————————————————————————————
 // Router
 
-const root = new Elysia({ prefix: "/eden" })
+const root = new Elysia()
   // .use(cors())
   .use(serverTiming())
   .use(docs)
