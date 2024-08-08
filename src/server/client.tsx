@@ -1,7 +1,12 @@
 import type { App } from "~/server"
 
 import { treaty } from "@elysiajs/eden"
-import { API_URL } from "~/constant/config"
+import { parse, string } from "valibot"
+
+// —————————————————————————————————————————————————————————————————————————————
+// Environment
+
+const API_URL = parse(string(), process.env.NEXT_PUBLIC_GATEWAY_URL)
 
 // —————————————————————————————————————————————————————————————————————————————
 // Elysia API Client
@@ -11,7 +16,7 @@ import { API_URL } from "~/constant/config"
  * @example
  * const { data } = await client.api.hello({ name: "world" }).get()
  */
-const client = treaty<App>("https://localhost:5555/eden")
+const client = treaty<App>(API_URL)
 
 // -----------------------------------------------------------------------------
 // Export

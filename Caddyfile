@@ -5,6 +5,6 @@
 }
 
 localhost:5555 {
-	reverse_proxy /eden/* {env.API_URL}
-	reverse_proxy * {env.NEXT_URL}
+	reverse_proxy /eden/* {env.API_HOSTNAME}:{env.API_PORT}
+	reverse_proxy * {env.NEXT_HOSTNAME}:{env.NEXT_PORT}
 }
