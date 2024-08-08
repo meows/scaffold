@@ -4,7 +4,7 @@ import { swagger } from "@elysiajs/swagger"
 import { serverTiming } from "@elysiajs/server-timing"
 
 import { green } from "~/lib/console"
-import { API_PORT } from "~/constant/config"
+import { API_PORT } from "~/env"
 
 import hello     from "~/server/route/hello"
 import user      from "~/server/route/user"
