@@ -34,7 +34,7 @@ export const env = new Proxy({
   GATEWAY_HOSTNAME: safeParse(string(), GATEWAY_HOSTNAME),
 } as const, {
   get(target, key) {
-    const value = target[key as keyof typeof target]
-    return value.success ? value.output : undefined
+    const { success, output } = target[key as keyof typeof target]
+    return success ? output : undefined
   }
 })
