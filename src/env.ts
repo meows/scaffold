@@ -1,4 +1,4 @@
-import { pipe, parse, string, url } from "valibot"
+import { pipe, parse, string, url, safeParse } from "valibot"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Validation
@@ -21,3 +21,20 @@ export const NEXT_HOSTNAME = parse(string(), process.env.NEXT_HOSTNAME)
 
 export const GATEWAY_PORT = parse(string(), process.env.GATEWAY_PORT)
 export const GATEWAY_HOSTNAME = parse(string(), process.env.GATEWAY_HOSTNAME)
+
+export const env = new Proxy({
+  DATABASE_URL: safeParse(string(), DATABASE_URL),
+  STREAM_URL: safeParse(string(), STREAM_URL),
+  API_PORT: safeParse(string(), API_PORT),
+  API_HOSTNAME: safeParse(string(), API_HOSTNAME),
+  API_PATH: safeParse(string(), API_PATH),
+  NEXT_PORT: safeParse(string(), NEXT_PORT),
+  NEXT_HOSTNAME: safeParse(string(), NEXT_HOSTNAME),
+  GATEWAY_PORT: safeParse(string(), GATEWAY_PORT),
+  GATEWAY_HOSTNAME: safeParse(string(), GATEWAY_HOSTNAME),
+} as const, {
+  get(target, key) {
+    const value = target[key as keyof typeof target]
+    return value.success ? value.output : undefined
+  }
+})
