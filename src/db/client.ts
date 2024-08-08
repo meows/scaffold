@@ -4,13 +4,13 @@ import { createClient } from "@libsql/client"
 import { drizzle } from "drizzle-orm/libsql"
 
 import * as schema from "~/db/schema"
-import * as env from "~/env"
+import { DATABASE_URL } from "~/env"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Database Client
 
 export const sqlite = createClient({
-  url: env.DATABASE_URL,
+  url: DATABASE_URL,
 })
 
 /** Drizzle database client */

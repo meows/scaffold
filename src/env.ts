@@ -8,17 +8,16 @@ const is_url = pipe(string("Oops, not a string."), url("Oops, not a URL."))
 // —————————————————————————————————————————————————————————————————————————————
 // Environment Variables
 
-/** Database endpoint. */
 export const DATABASE_URL = parse(string(), process.env.DATABASE_URL)
 
-/** Event stream endpoint. */
-export const STREAM_URL = parse(is_url, process.env.STREAM_URL)
+export const STREAM_URL = parse(string(), process.env.STREAM_URL)
 
-/** API server port. */
 export const API_PORT = parse(string(), process.env.API_PORT)
+export const API_HOSTNAME = parse(string(), process.env.API_HOSTNAME)
+export const API_PATH = parse(string(), process.env.API_PATH)
 
-/** API server endpoint. */
-export const API_URL = parse(is_url, process.env.API_URL)
+export const NEXT_PORT = parse(string(), process.env.NEXT_PORT)
+export const NEXT_HOSTNAME = parse(string(), process.env.NEXT_HOSTNAME)
 
-/** Next server endpoint. */
-export const NEXT_URL = parse(is_url, process.env.NEXT_URL)
+export const GATEWAY_PORT = parse(string(), process.env.GATEWAY_PORT)
+export const GATEWAY_HOSTNAME = parse(string(), process.env.GATEWAY_HOSTNAME)

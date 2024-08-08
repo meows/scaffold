@@ -1,7 +1,7 @@
 import type { App } from "~/server"
 
 import { treaty } from "@elysiajs/eden"
-import { API_URL } from "~/constant/config"
+import { API_PATH, GATEWAY_HOSTNAME, GATEWAY_PORT } from "~/env"
 
 // —————————————————————————————————————————————————————————————————————————————
 // Elysia API Client
